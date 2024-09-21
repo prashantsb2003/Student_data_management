@@ -1,0 +1,161 @@
+#include<iostream>
+#include<string>
+#include<iomanip>
+#include<stdlib.h>
+
+using namespace std;
+
+void get_data(int ); 
+// bool edit_student(string );
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int options()
+{
+	
+  label:
+		  cout<<"Enter the operation to do\n";
+		  cout<<"\n\t\tWhat do you want to do?"<<endl;
+		  cout<<"\t\t----------------------"<<endl;
+		  cout<<"\t\t1-Add student"<<endl;
+		  cout<<"\t\t2-Edit student"<<endl;
+		  cout<<"\t\t3-Quit Program"<<endl;
+		  cout<<"\t\t----------------------"<<endl;
+		  cout<<"Enter your choice: ";
+		    int i;
+		    cin>>i;
+		    
+		    if (i>0 && i<4)
+		         return i;
+		    
+		    else
+			 	{
+				 system("CLS");
+		    	 cout<<"You entered invalid choice!\n Select agin \n";
+		    	 goto label;
+		       }	
+			
+}
+
+
+
+void format()
+{   cout<<"--------------------------------------------------------------------------------------------------------------------"<<endl;
+	cout<<"-------------------------------------------STUDENT RECORD TABLE-----------------------------------------------------"<<endl;
+	cout<<"--------------------------------------------------------------------------------------------------------------------"<<endl; 
+	cout<<left<<setw(25)<<"NAME"<<left<<setw(20)<<"USN"<<left<<setw(15)<<"DOB"<<left<<setw(20)<<"SEMISTER"<<left<<setw(15)<<"CGPA"<<left<<setw(15)<<"TOWN"<<endl;
+	cout<<"--------------------------------------------------------------------------------------------------------------------"<<endl;
+}
+
+
+class student
+{
+	
+	public:
+		string name,usn,dob,town;
+		float cgpa;
+		int sem ;
+		
+	    student():name("a"),usn("a"),dob("a"),sem(0),cgpa(0.0),town("a")
+	    		{}
+	    		
+	    void read()
+		{  
+		    cout<<"\n Enter the name of the student: ";
+		    cin>>name;
+		    cout<<"\nEnter the USN of the student: ";
+		    cin>>usn;
+		    cout<<"\nEnter the date of birth of the student in DD/MM/YY format: ";
+		    cin>>dob;
+		    cout<<"\nEnter the current semister: ";
+		    cin>>sem;
+		    cout<<"\nEnter the current cgpa: ";
+		    cin>>cgpa;
+		    cout<<"\nEnter the home town: ";
+		    cin>>town;
+		}	
+		void show()
+		{ cout<<left<<setw(25)<<name<<left<<setw(20)<<usn<<left<<setw(15)<<dob<<left<<setw(20)<<sem<<left<<setw(15)<<cgpa<<left<<setw(15)<<town<<endl;
+		}
+		
+	
+};
+//////////////////////////////////////////////////////// MAIN FUNCTION  //////////////////////////////////////////////////
+int main()
+{  
+  	int max;
+   	int op,stu=0;
+  	student* s[stu];
+  	system("color 0a");
+ 	
+                
+                
+while(true) 
+{
+
+  op=options();  
+  switch(op)
+		       {
+    			case 1:
+				       {     
+					         cout<<"Enter the number of students\n";
+					         int n;
+					         cin>>n;
+			                 for(int i=0;i<n;i++)
+			                  { system("cls");
+							  	cout<<"Enter data for student:"<<i+1<<endl; 
+			                    s[stu]= new student();
+			                    s[stu]->read();
+			                    stu++;
+			                  }
+			                 system("CLS");
+							 cout<<endl;
+						     format();
+			                 for(int i=0;i<stu;i++)
+			                  {  
+			                     s[i]->show();
+			                  }
+						    
+			                cout<<"--------------------------------------------------------------------------------------------------------------------"<<endl;
+			                cout<<"--------------------------------------------------------------------------------------------------------------------"<<endl;
+							break;     
+					 	}
+					 	
+			    case 2:
+						{ 
+					       	cout<<"Enter the usn of student to edit\n";
+					       	string usn1;
+				           	cin>>usn1;
+				           	int i;
+			            	for(i=0;i<stu;i++)
+			                   {
+				             	if(s[i]->usn == usn1)
+				                 	{
+					 					 s[i]->read();
+					 					 system("CLS");
+										 cout<<"\nStudent data on usn :"<<usn1<<" is edited:\n";
+										 format();
+									                  for(int i=0;i<stu;i++)
+									                  {  
+									                     s[i]->show();
+									                  }
+									     cout<<"--------------------------------------------------------------------------------------------------------------------"<<endl;
+									     cout<<"--------------------------------------------------------------------------------------------------------------------"<<endl;
+									     break;		
+									}
+				           	    }
+				           	     
+							cout<<"Student on the usn: "<<usn1<<" does not exist:\n";   		
+						    
+							break ;	          	
+						}
+			    case 3:
+					 	{   return 0;
+						    break;
+					    }
+		
+			    }
+}
+
+	return 0;
+	
+}
